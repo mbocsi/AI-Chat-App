@@ -15,10 +15,10 @@ export default function Chat() {
       <div className="w-full py-1 px-4 flex flex-row justify-end">
         <ModeToggle />
       </div>
-      <div className="flex flex-col w-full max-w-2xl p-4 mx-auto bg-secondary rounded-xl space-y-4">
+      <div className="flex flex-col w-full max-w-2xl p-4 mx-auto bg-secondary rounded-xl space-y-4 items-center">
         {messages.map((m, i) => (
           <div
-            className={`flex flex-row ${
+            className={`flex flex-row w-full ${
               m.role === "user" ? "justify-end" : "justify-start"
             }`}
           >
@@ -32,37 +32,45 @@ export default function Chat() {
             </div>
           </div>
         ))}
+        <div className="w-full">
+          <form
+            action={async () => {
+              const newMessages: CoreMessage[] = [
+                ...messages,
+                { content: input, role: "user" },
+              ];
 
-        <form
-          action={async () => {
-            const newMessages: CoreMessage[] = [
-              ...messages,
-              { content: input, role: "user" },
-            ];
+              setMessages(newMessages);
+              setInput("");
+              const result = await continueConversation(newMessages);
 
-            setMessages(newMessages);
-            setInput("");
+              for await (const content of readStreamableValue(result)) {
+                setMessages([
+                  ...newMessages,
+                  {
+                    role: "assistant",
+                    content: content as string,
+                  },
+                ]);
+              }
+            }}
+            onSubmit={() => {
+              const newMessages: CoreMessage[] = [
+                ...messages,
+                { content: input, role: "user" },
+              ];
 
-            const result = await continueConversation(newMessages);
-
-            for await (const content of readStreamableValue(result)) {
-              setMessages([
-                ...newMessages,
-                {
-                  role: "assistant",
-                  content: content as string,
-                },
-              ]);
-            }
-          }}
-        >
-          <Input
-            className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded-xl shadow-xl"
-            value={input}
-            placeholder="Say something..."
-            onChange={(e) => setInput(e.target.value)}
-          />
-        </form>
+              setMessages(newMessages);
+            }}
+          >
+            <Input
+              className="w-full border border-gray-300 rounded-xl shadow-xl"
+              value={input}
+              placeholder="Say something..."
+              onChange={(e) => setInput(e.target.value)}
+            />
+          </form>
+        </div>
       </div>
     </main>
   );
