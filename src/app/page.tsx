@@ -15,14 +15,19 @@ export default function Chat() {
       <div className="w-full py-1 px-4 flex flex-row justify-end">
         <ModeToggle />
       </div>
-      <div className="flex flex-col w-full max-w-xl p-4 mx-auto bg-secondary rounded-xl space-y-4">
+      <div className="flex flex-col w-full max-w-2xl p-4 mx-auto bg-secondary rounded-xl space-y-4">
         {messages.map((m, i) => (
           <div
-            className={`flex flex-row justif ${
+            className={`flex flex-row ${
               m.role === "user" ? "justify-end" : "justify-start"
             }`}
           >
-            <div key={i} className="whitespace-pre-wrap rounded-xl bg-card p-4">
+            <div
+              key={i}
+              className={`whitespace-pre-wrap rounded-xl max-w-lg ${
+                m.role === "user" ? "bg-user" : "bg-ai"
+              } p-4`}
+            >
               {m.content as string}
             </div>
           </div>
@@ -52,7 +57,7 @@ export default function Chat() {
           }}
         >
           <Input
-            className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+            className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded-xl shadow-xl"
             value={input}
             placeholder="Say something..."
             onChange={(e) => setInput(e.target.value)}

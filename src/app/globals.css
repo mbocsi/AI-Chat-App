@@ -28,10 +28,10 @@
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 210 40% 98%;
 
-      --user: 210 40% 96.1%;
+      --user: 167 40% 80%;
       --user-foreground: 222.2 47.4% 11.2%;
 
-      --ai: 210 40% 96.1%;
+      --ai: 167 0% 85%;
       --ai-foreground: 222.2 47.4% 11.2%;
 
       --border: 214.3 31.8% 91.4%;
@@ -66,10 +66,10 @@
       --destructive: 0 62.8% 30.6%;
       --destructive-foreground: 210 40% 98%;
 
-      --user: 217.2 32.6% 17.5%;
+      --user: 167 40% 30%;
       --user-foreground: 210 40% 98%;
 
-      --ai: 217.2 32.6% 17.5%;
+      --ai: 167 0% 25%;
       --ai-foreground: 210 40% 98%;
 
       --border: 217.2 32.6% 17.5%;
