@@ -15,7 +15,7 @@ export default function Chat() {
       <div className="w-full py-1 px-4 flex flex-row justify-end">
         <ModeToggle />
       </div>
-      <div className="flex flex-col w-full max-w-2xl p-4 mx-auto bg-secondary rounded-xl space-y-4 items-center">
+      <div className="flex flex-col w-full max-w-2xl p-4 mx-auto rounded-xl space-y-4 items-center">
         {messages.map((m, i) => (
           <div
             className={`flex flex-row w-full ${
